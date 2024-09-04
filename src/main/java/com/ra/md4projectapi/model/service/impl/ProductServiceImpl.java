@@ -2,6 +2,8 @@ package com.ra.md4projectapi.model.service.impl;
 
 import com.ra.md4projectapi.exception.DataExistException;
 import com.ra.md4projectapi.model.dto.request.ProductRequest;
+import com.ra.md4projectapi.model.dto.response.OutstandingProductResponse;
+import com.ra.md4projectapi.model.dto.response.ProductDTO;
 import com.ra.md4projectapi.model.entity.Category;
 import com.ra.md4projectapi.model.entity.Product;
 import com.ra.md4projectapi.model.repository.IProductRepository;
@@ -12,12 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -125,5 +125,15 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public List<Product> findProductByNameOrDescription(String search) {
         return productRepository.findByNameOrDescriptionContaining(search);
+    }
+
+    @Override
+    public List<ProductDTO> findSellProduct() {
+        return productRepository.sellestProducts(PageRequest.of(0,5));
+    }
+
+    @Override
+    public List<OutstandingProductResponse> findOutstandingProduct() {
+        return productRepository.outstandingProducts(PageRequest.of(0,5));
     }
 }

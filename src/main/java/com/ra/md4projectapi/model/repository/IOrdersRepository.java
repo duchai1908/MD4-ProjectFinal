@@ -1,6 +1,7 @@
 package com.ra.md4projectapi.model.repository;
 
 import com.ra.md4projectapi.constants.Status;
+import com.ra.md4projectapi.model.entity.OrderDetail;
 import com.ra.md4projectapi.model.entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 

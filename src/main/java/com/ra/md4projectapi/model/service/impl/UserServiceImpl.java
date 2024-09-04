@@ -75,7 +75,7 @@ public class UserServiceImpl implements IUserService {
         user.setEmail(userRequest.getEmail());
         user.setAddress(userRequest.getAddress());
         user.setPhone(userRequest.getPhone());
-        if(userRequest.getImage().getSize() >0){
+        if(userRequest.getImage().getSize() >0 || userRequest.getImage()!=null){
             user.setImage(uploadService.uploadFileToServer(userRequest.getImage()));
         }
         user.setDob(userRequest.getDob());

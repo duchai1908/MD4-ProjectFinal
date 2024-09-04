@@ -3,7 +3,6 @@ package com.ra.md4projectapi.controller.user;
 import com.ra.md4projectapi.model.dto.response.ResponseDtoSuccess;
 import com.ra.md4projectapi.model.service.IWishlistService;
 import com.ra.md4projectapi.security.principle.UserDetailCustom;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

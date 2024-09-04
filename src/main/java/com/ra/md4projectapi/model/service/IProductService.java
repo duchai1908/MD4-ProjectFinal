@@ -2,6 +2,8 @@ package com.ra.md4projectapi.model.service;
 
 import com.ra.md4projectapi.exception.DataExistException;
 import com.ra.md4projectapi.model.dto.request.ProductRequest;
+import com.ra.md4projectapi.model.dto.response.OutstandingProductResponse;
+import com.ra.md4projectapi.model.dto.response.ProductDTO;
 import com.ra.md4projectapi.model.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +21,6 @@ public interface IProductService {
     List<Product> getLatestProducts();
     Page<Product> findProductsSold(Pageable pageable);
     List<Product> findProductByNameOrDescription(String search);
+    List<ProductDTO> findSellProduct();
+    List<OutstandingProductResponse> findOutstandingProduct();
 }

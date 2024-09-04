@@ -1,7 +1,10 @@
 package com.ra.md4projectapi.model.service.impl;
 
 import com.ra.md4projectapi.constants.Status;
+import com.ra.md4projectapi.model.dto.response.OrderResponse;
+import com.ra.md4projectapi.model.entity.OrderDetail;
 import com.ra.md4projectapi.model.entity.Orders;
+import com.ra.md4projectapi.model.repository.IOrderDetailRepository;
 import com.ra.md4projectapi.model.repository.IOrdersRepository;
 import com.ra.md4projectapi.model.service.IOrdersService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements IOrdersService {
     private final IOrdersRepository ordersRepository;
+    private final IOrderDetailRepository orderDetailRepository;
     // Get All Orders
     @Override
     public List<Orders> getOrders() {
@@ -61,8 +65,14 @@ public class OrdersServiceImpl implements IOrdersService {
 
     // Get OrderByCode
     @Override
-    public Orders getOrdersBySku(String sku, Long id) {
-        return ordersRepository.findByCodeAndUserId(sku,id).orElseThrow(()-> new NoSuchElementException("Orders Not Found"));
+    public OrderResponse getOrdersBySku(String sku, Long id) {
+        Orders orders = ordersRepository.findByCodeAndUserId(sku,id).orElseThrow(()-> new NoSuchElementException("Orders Not Found"));
+        List<OrderDetail> listOrderDetail= orderDetailRepository.findAllByOrderId(orders.getId());
+        OrderResponse orderResponse = OrderResponse.builder()
+                .order(orders)
+                .orderDetails(listOrderDetail)
+                .build();
+        return orderResponse;
     }
 
     //Get OrderByStatus

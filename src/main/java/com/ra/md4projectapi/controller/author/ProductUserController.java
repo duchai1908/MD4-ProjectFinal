@@ -40,4 +40,16 @@ public class ProductUserController {
     public ResponseEntity<?> searchProduct(@RequestParam(defaultValue = "" )String search) {
         return new ResponseEntity<>(new ResponseDtoSuccess<>(productService.findProductByNameOrDescription(search), HttpStatus.OK),HttpStatus.OK);
     }
+
+    //Get SellProduct
+    @GetMapping("/sellProduct")
+    public ResponseEntity<?> getSellProduct() {
+        return new ResponseEntity<>(new ResponseDtoSuccess<>(productService.findSellProduct(), HttpStatus.OK),HttpStatus.OK);
+    }
+
+    //Get OutStanding Product
+    @GetMapping("/outStandingProduct")
+    public ResponseEntity<?> getOutStandingProduct() {
+        return new ResponseEntity<>(new ResponseDtoSuccess<>(productService.findOutstandingProduct(), HttpStatus.OK),HttpStatus.OK);
+    }
 }
